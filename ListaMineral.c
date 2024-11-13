@@ -44,6 +44,7 @@ void Limprime(TListaMineral* pLista) {
                pLista->Item[i].Chave.dureza,
                pLista->Item[i].Chave.reatividade,
                pLista->Item[i].Chave.cor);
+    }
 }
 
 void PListaMinerais(TListaMineral* pLista, TMineral* mineral) {
@@ -54,7 +55,7 @@ void PListaMinerais(TListaMineral* pLista, TMineral* mineral) {
     TMineral Aquavitae = preenche_mineral(mineral, "Aquavitae", 0.5, 0.8, "Azul");
     TMineral Terranita = preenche_mineral(mineral, "Terranita", 0.7, 0.6, "Marrom");
     TMineral Calaris = preenche_mineral(mineral, "Calaris", 0.6, 0.5, "Vermelho");
-    
+
     LInsere(pLista, Ferrolita);
     LInsere(pLista, Solarium);
     LInsere(pLista, Aquavitae);
