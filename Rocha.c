@@ -8,67 +8,43 @@
 
 void iniciarRocha(TRocha *rocha, int identificador,double peso,char localizacao,int data) {
 
-    set_identificador(rocha, identificador) 
-    set_localizacao(rocha, localizacao) 
-    set_peso(rocha, peso) 
-    set_data(rocha, data) 
+    set_identificador(rocha, identificador);
+    set_localizacao(rocha, localizacao);
+    set_peso(rocha, peso);
+    set_data(rocha, data);
 } 
 
 double get_peso(TRocha *rocha) {
-    return rocha->peso
+    return rocha->peso;
 }
 
 int get_data(TRocha *rocha) {
- return rocha->data
+ return rocha->data;
 }
 
-char get_localizacao(TRocha *rocha) {
- return rocha->localizacao
+char* get_localizacao(TRocha *rocha) {
+ return rocha->localizacao;
 }
 
-const char* classificar(TRocha *rocha, char categoria) {
+const char* classificar(TListaMineral *pLista, TRocha *rocha, char categoria) {
 
-    const char *Ferrom[]= {'Ferrolita'};
-    const char *Solaris[] = {'Solarium'};
-    const char *Aquaferro[] = {'Ferrolita','Aquavitae'};
-    const char *Terrolis[]= {'Terranita','Calaris'};
-    const char *Terrasol[]= {'Terranita, Solarium'};
-    const char *Aquaterra[]= {'Aquavitae, Terranita'};
-    const char *Calquer[] = {'Calaris', 'Aquavitae'};
-    const char *Solarisfer[]= {'Solarium','Ferrolita'};
-    const char *Terralis[]= {'Terranita','Ferrolita'};
-    const char *Aquacalis[]= {'Aquavitae','Calaris','Ferrolita'};
+    FLVazia(pLista);
+    PListaMinerais(&pLista, );
 
-    for (int i=0; i < 5 ; i++){
-        if('Ferrom' == lista_mineral){
-            return (rocha->categoria = "Ferrom");
-        }
-        else if(Solaris == lista_mineral){
-            return rocha->categoria = "Solaris";
-        }
-        if(Aquaferro == lista_mineral){
-            return rocha->categoria = "Aquaferro";
-        }
-        if(Ferrom == lista_mineral){
-            return rocha->categoria = "Ferrom";
-        }
-        if(Ferrom == lista_mineral){
-            return rocha->categoria = "Ferrom";
-        }
-        if(Ferrom == lista_mineral){
-            return rocha->categoria = "Ferrom";
-        }
-        if(Ferrom == lista_mineral){
-            return rocha->categoria = "Ferrom";
-        }
-        if(Ferrom == lista_mineral){
-            return rocha->categoria = "Ferrom";
-        }
-        if(Ferrom == lista_mineral){
-            return rocha->categoria = "Ferrom";
-        }
-        if(Ferrom == lista_mineral){
-            return rocha->categoria = "Ferrom";
-        }
-    }
+}
+
+void set_identificador(TRocha *rocha, int indentificador) {
+    rocha->identificador = indentificador;
+}
+
+void set_localizacao(TRocha *rocha, char localizacao) {
+    strcpy(rocha->localizacao = localizacao);
+}
+
+void set_peso(TRocha *rocha, double peso) {
+    rocha->peso = peso;
+}
+
+void set_data(TRocha *rocha, int data) {
+    rocha->data = data;
 }

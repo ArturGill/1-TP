@@ -13,10 +13,10 @@ typedef struct
     int data;
 } TRocha;
 
-void iniciarRocha(TRocha *rocha, int identificador,double peso,char localizacao,int data);
+void iniciarRocha(TRocha *rocha, int identificador,double peso, char localizacao,int data);
 double get_peso(TRocha *rocha);
 int get_data(TRocha *rocha);
-char get_localizacao(TRocha *rocha);
+char *get_localizacao(TRocha *rocha);
 void set_identificador(TRocha *rocha, int indentificador);
 void set_localizacao(TRocha *rocha, char localizacao);
 void set_peso(TRocha *rocha, double peso);
