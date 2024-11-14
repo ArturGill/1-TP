@@ -1,74 +1,102 @@
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
 #include "Rocha.h"
-#include "ListaMineral.h"
 
-void iniciarRocha(TRocha *rocha, int identificador,double peso,char localizacao,int data) {
+TRocha iniciarRocha(TRocha* rocha, int identificador, TListaMineral* lista_mineral, char *categoria, double peso, float lat_rocha, float long_rocha, int data) {
+    set_identificador(rocha, identificador);
+    set_listaminerais(rocha, lista_mineral);
+    set_categoria(rocha, categoria);
+    set_peso(rocha, peso);
+    set_latRocha(rocha, lat_rocha);
+    set_longRocha(rocha, long_rocha);
+    set_data(rocha, data);
 
-    set_identificador(rocha, identificador) 
-    set_localizacao(rocha, localizacao) 
-    set_peso(rocha, peso) 
-    set_data(rocha, data) 
+    return *rocha;
 } 
 
 double get_peso(TRocha *rocha) {
-    return rocha->peso
+    return rocha->peso;
 }
 
 int get_data(TRocha *rocha) {
- return rocha->data
+    return rocha->data;
 }
 
-char get_localizacao(TRocha *rocha) {
- return rocha->localizacao
+void set_listaminerais(TRocha* rocha, TListaMineral *lista_mineral) {
+    rocha->lista_mineral = lista_mineral;
 }
 
-const char* classificar(TRocha *rocha, char categoria) {
+void set_categoria(TRocha *rocha, char *categoria) {
+    strcpy(rocha->categoria, categoria);
+}
 
-    const char *Ferrom[]= {'Ferrolita'};
-    const char *Solaris[] = {'Solarium'};
-    const char *Aquaferro[] = {'Ferrolita','Aquavitae'};
-    const char *Terrolis[]= {'Terranita','Calaris'};
-    const char *Terrasol[]= {'Terranita, Solarium'};
-    const char *Aquaterra[]= {'Aquavitae, Terranita'};
-    const char *Calquer[] = {'Calaris', 'Aquavitae'};
-    const char *Solarisfer[]= {'Solarium','Ferrolita'};
-    const char *Terralis[]= {'Terranita','Ferrolita'};
-    const char *Aquacalis[]= {'Aquavitae','Calaris','Ferrolita'};
+void set_identificador(TRocha *rocha, int identificador) {
+    rocha->identificador = identificador;
+}
 
-    for (int i=0; i < 5 ; i++){
-        if('Ferrom' == lista_mineral){
-            return (rocha->categoria = "Ferrom");
+void set_latRocha(TRocha *rocha, float lat_rocha) {
+    rocha->lat_rocha = lat_rocha;
+}
+
+void set_longRocha(TRocha *rocha, float long_rocha) {
+    rocha->long_rocha = long_rocha;
+}
+
+void set_peso(TRocha *rocha, double peso) {
+    rocha->peso = peso;
+}
+
+void set_data(TRocha *rocha, int data) {
+    rocha->data = data;
+}
+
+const char *classificar(TListaMineral *pLista, TRocha *rocha)
+{
+    int aux = TMListaM(pLista);
+    if (aux == 1)
+    {
+        {
+            if (strcmp(pLista->ItemM[0].Chave.nomeM, "Ferrolita") == 0)
+            {
+                return "Ferrom";
+            }
+            else if (strcmp(pLista->ItemM[0].Chave.nomeM, "Solarium") == 0)
+            {
+                return "Solaris";
+            }
         }
-        else if(Solaris == lista_mineral){
-            return rocha->categoria = "Solaris";
+    }
+    if (aux == 2)
+    {
+        if (strcmp(pLista->ItemM[0].Chave.nomeM, "Terranita") == 0 || (strcmp(pLista->ItemM[1].Chave.nomeM, "Terranita")) == 0)
+        {
+            if (strcmp(pLista->ItemM[0].Chave.nomeM, "Calaris") == 0 || (strcmp(pLista->ItemM[1].Chave.nomeM, "Calaris")) == 0){
+                return "Terrolis";
+            }
+            else if (strcmp(pLista->ItemM[0].Chave.nomeM, "Solarium") == 0 || (strcmp(pLista->ItemM[1].Chave.nomeM, "Solarium")) == 0){
+                return "Terrasol";
+            }
+            else if (strcmp(pLista->ItemM[0].Chave.nomeM, "Aquavitae") == 0 || (strcmp(pLista->ItemM[1].Chave.nomeM, "Aquavitae")) == 0){
+                return "Aquaterra";
+            }
+            else if (strcmp(pLista->ItemM[0].Chave.nomeM, "Ferrolita") == 0 || (strcmp(pLista->ItemM[1].Chave.nomeM, "Ferrolita")) == 0){
+                return "Terralis";
+            }
         }
-        if(Aquaferro == lista_mineral){
-            return rocha->categoria = "Aquaferro";
+        if (strcmp(pLista->ItemM[0].Chave.nomeM, "Aquavitae") == 0 || (strcmp(pLista->ItemM[1].Chave.nomeM, "Aquavitae") == 0)){
+            if(strcmp(pLista->ItemM[0].Chave.nomeM, "Calaris") == 0 || (strcmp(pLista->ItemM[1].Chave.nomeM, "Calaris")) == 0){
+                return "Calquer";
+            }
         }
-        if(Ferrom == lista_mineral){
-            return rocha->categoria = "Ferrom";
+        if (strcmp(pLista->ItemM[0].Chave.nomeM, "Ferrolita") == 0 || (strcmp(pLista->ItemM[1].Chave.nomeM, "Ferrolita")) == 0){
+            if (strcmp(pLista->ItemM[0].Chave.nomeM, "Solarium") == 0 || (strcmp(pLista->ItemM[1].Chave.nomeM, "Solarium")) == 0){
+                return "Solarisfer";
+            }
         }
-        if(Ferrom == lista_mineral){
-            return rocha->categoria = "Ferrom";
-        }
-        if(Ferrom == lista_mineral){
-            return rocha->categoria = "Ferrom";
-        }
-        if(Ferrom == lista_mineral){
-            return rocha->categoria = "Ferrom";
-        }
-        if(Ferrom == lista_mineral){
-            return rocha->categoria = "Ferrom";
-        }
-        if(Ferrom == lista_mineral){
-            return rocha->categoria = "Ferrom";
-        }
-        if(Ferrom == lista_mineral){
-            return rocha->categoria = "Ferrom";
-        }
+    }
+    if (aux == 3){
+        return "Aquacalis";
     }
 }
