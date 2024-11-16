@@ -6,21 +6,27 @@
 typedef struct
 {
     int identificador;
+    TListaMineral *lista_mineral;
     char categoria[50];
-    TListaMineral lista_mineral;
     double peso;
-    char localizacao[50];
+    float lat_rocha, long_rocha;
     int data;
 } TRocha;
 
-void iniciarRocha(TRocha *rocha, int identificador,double peso,char localizacao,int data);
+TRocha iniciarRocha(TRocha *rocha, int identificador, TListaMineral *lista_mineral, char *categoria, double peso, float lat_rocha, float long_rocha, int data);
+TRocha preenche_rocha(TRocha* rocha, int identificador, char* categoria);
 double get_peso(TRocha *rocha);
 int get_data(TRocha *rocha);
-char get_localizacao(TRocha *rocha);
-void set_identificador(TRocha *rocha, int indentificador);
-void set_localizacao(TRocha *rocha, char localizacao);
+char *get_localizacao(TRocha *rocha);
+
+void set_identificador(TRocha *rocha, int identificador);
+void set_listaminerais(TRocha *rocha, TListaMineral *lista_mineral);
+void set_categoria(TRocha *rocha, char *categoria);
 void set_peso(TRocha *rocha, double peso);
+void set_latRocha(TRocha *rocha, float lat_rocha);
+void set_longRocha(TRocha *rocha, float long_rocha);
 void set_data(TRocha *rocha, int data);
-const char* classificar(TRocha *rocha, char categoria);
+
+char* classificar(TListaMineral *pListaC);
 
 #endif // ROCHA_H

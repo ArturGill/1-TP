@@ -6,25 +6,25 @@
 
 #include "Mineral.h"
 
-typedef TMineral Tchave;
-typedef int Apontador;
+typedef int ApontadorMineral;
 
 typedef struct 
 {
-    Tchave Chave;
-} TItem;
+    TMineral Chave;
+} TItemMineral;
 
 typedef struct 
 {
-    TItem Item[MaxTam];
-    Apontador Primeiro, Ultimo;
+    TItemMineral ItemM[MaxTam];
+    ApontadorMineral Primeiro, Ultimo;
 } TListaMineral;
 
-void FLVazia(TListaMineral* pLista);
-int LEhVazia(TListaMineral* pLista);
-int LInsere(TListaMineral* pLista, TMineral x);
-int LRetiraMnome(TListaMineral* pLista, char *nomeM, TItem *pX);
-void Limprime(TListaMineral* pLista);
+void FLVaziaM(TListaMineral* pLista);
+int LEhVaziaM(TListaMineral* pLista);
+void LInsereM(TListaMineral* pLista, TMineral x);
+int LRetiraMnome(TListaMineral* pLista, char *nomeM, TMineral *pX);
+void LimprimeM(TListaMineral* pLista);
 void PListaMinerais(TListaMineral* pLista, TMineral* mineral);
+int TMListaM(TListaMineral *pLista);
 
 #endif
