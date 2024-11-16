@@ -1,5 +1,6 @@
 #include "ListaMineral.h"
 #include <stdio.h>
+#include <string.h>
 
 void FLVaziaM(TListaMineral* pLista) {
     pLista->Primeiro = InicioArranjo;
@@ -10,23 +11,24 @@ int LEhVaziaM(TListaMineral* pLista) {
     return pLista->Ultimo == pLista->Primeiro;
 }
 
-int LInsereM(TListaMineral* pLista, TMineral x) {
-    if (pLista->Ultimo == MaxTam) {
-        return 0;
+void LInsereM(TListaMineral* pLista, TMineral x) {
+    if (pLista->Ultimo >= MaxTam) {
+        printf("ERRO DE INCERCAO");
+        return;
     }
-    pLista->ItemM[pLista->Ultimo++].Chave = x;
-    return 1;
+    pLista->ItemM[pLista->Ultimo].Chave = x;
+    pLista->Ultimo++; 
 }
 
-int LRetiraMnome(TListaMineral* pLista, char *nomeM, TItemMineral *pX) {
+int LRetiraMnome(TListaMineral* pLista, char *nomeM, TMineral *pX) {
     int cont;
     
     if (LEhVaziaM(pLista)) {
         return 0;
     }
     for (cont = pLista->Primeiro; cont <= pLista->Ultimo; cont++) {
-        if (nomeM == pLista->ItemM[cont].Chave.nomeM) {
-            *pX = pLista->ItemM[cont];
+        if (strcmp(nomeM, pLista->ItemM[cont].Chave.nomeM) == 0) {
+            *pX = pLista->ItemM[cont].Chave;
             for (cont + 1; cont < pLista->Ultimo; cont++) {
                 pLista->ItemM[cont - 1] = pLista->ItemM[cont];
             }
@@ -49,7 +51,12 @@ void LimprimeM(TListaMineral* pLista) {
 
 int TMListaM(TListaMineral *pLista)
 {
-    return pLista->Ultimo - pLista->Primeiro;
+    int count = 0;
+    for (int cont = pLista->Primeiro; cont < pLista->Ultimo; cont++){
+        count++;
+    }
+    
+    return count;
 }
 
 void PListaMinerais(TListaMineral* pLista, TMineral* mineral) {

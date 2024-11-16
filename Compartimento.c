@@ -1,11 +1,10 @@
 #include "Compartimento.h"
-#include "SondaEspacial.h"
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
-int LTamanhoC(TLista *pLista)
+int LTamanhoC(TListaRocha *pLista)
 {
     int cont = 0;
     TCelulaRocha *pAux;
@@ -13,52 +12,45 @@ int LTamanhoC(TLista *pLista)
     while (pAux != NULL)
     {
         cont++;
+        pAux = pAux->pProx;
     }
     return cont;
 }
 
-void FLVaziaC(TLista *pLista)
+void FLVaziaC(TListaRocha *pLista)
 {
     pLista->pPrimeiro = (ApontadorRocha)malloc(sizeof(TCelulaRocha));
     pLista->pUltimo = pLista->pPrimeiro;
     pLista->pPrimeiro->pProx = NULL;
 }
 
-int LEhVaziaC(TLista *pLista)
+int LEhVaziaC(TListaRocha *pLista)
 {
     return pLista->pPrimeiro == pLista->pUltimo;
 }
 
-int LInsereC(TLista *pLista, TItemRocha *pItem, SondaMarte *sonda)
+int LInsereC(TListaRocha *pLista, TRocha *pItem)
 {
-    int peso = CapacidadeMax(pLista, sonda);
-    if (peso == 1)
+    ApontadorRocha pAux = pLista->pPrimeiro->pProx;
+
+    while (pAux != NULL)
     {
-        ApontadorRocha pAux = pLista->pPrimeiro->pProx;
-
-        while (pAux != NULL)
+        if (strcmp(pAux->Item.Chave->categoria, pItem->categoria) == 0)
         {
-            if (strcmp(pAux->Item.Chave->categoria, pItem->Chave->categoria) == 0)
-            {
-                TrocarRocha(pLista, pItem);
-                return 1;
-            }
-            pAux = pAux->pProx;
+            TrocarRocha(pLista, pItem);
+            return 1;
         }
+        pAux = pAux->pProx;
+    }
 
-        pLista->pUltimo->pProx = (ApontadorRocha)malloc(sizeof(TCelulaRocha));
-        pLista->pUltimo = pLista->pUltimo->pProx;
-        pLista->pUltimo->Item = *pItem;
-        pLista->pUltimo->pProx = NULL;
-        return 1;
-    }
-    else {
-        printf("Capacidade maxima!\n");
-        return 0;
-    }
+    pLista->pUltimo->pProx = (ApontadorRocha)malloc(sizeof(TCelulaRocha));
+    pLista->pUltimo = pLista->pUltimo->pProx;
+    pLista->pUltimo->Item.Chave = pItem;
+    pLista->pUltimo->pProx = NULL;
+    return 0;
 }
 
-int LRetiraC(TLista *pLista, char *categoria)
+int LRetiraC(TListaRocha *pLista, TRocha* rocha)
 {
     if (LEhVaziaC(pLista))
     {
@@ -67,7 +59,7 @@ int LRetiraC(TLista *pLista, char *categoria)
     TCelulaRocha *aux1 = pLista->pPrimeiro;
     TCelulaRocha *aux2 = NULL;
 
-    while (aux1 != NULL && strcmp(aux1->Item.Chave->categoria, categoria) != 0)
+    while (aux1 != NULL && strcmp(aux1->Item.Chave->categoria, rocha->categoria) != 0)
     {
         aux2 = aux1;
         aux1 = aux1->pProx;
@@ -82,48 +74,35 @@ int LRetiraC(TLista *pLista, char *categoria)
     return 1;
 }
 
-void LImprimeC(TLista *pLista)
+void LImprimeC(TListaRocha pLista)
 {
     ApontadorRocha pAux;
-    pAux = pLista->pPrimeiro->pProx;
+    pAux = pLista.pPrimeiro->pProx;
     while (pAux != NULL)
     {
-        printf("%d\n", pAux->Item.Chave);
+        printf("%s\n", pAux->Item.Chave->categoria);
         pAux = pAux->pProx; // próxima célula
     }
-    if (pAux == pLista->pPrimeiro->pProx)
+    if (pAux == pLista.pPrimeiro->pProx)
     {
         printf("A lista é vazia\n");
     }
 }
 
-void TrocarRocha(TLista *pLista, TItemRocha *Item)
+void TrocarRocha(TListaRocha *pLista, TRocha *Item)
 {
     ApontadorRocha att = pLista->pPrimeiro->pProx;
     while (att != NULL)
     {
-        if (strcmp(att->Item.Chave->categoria, Item->Chave->categoria) == 0 && att->Item.Chave->peso < Item->Chave->peso)
+        if (strcmp(att->Item.Chave->categoria, Item->categoria) == 0 && att->Item.Chave->peso < Item->peso)
         {
-            att->Item = *Item;
+            att->Item.Chave = Item;
         }
         att = att->pProx;
     }
 }
 
-int CapacidadeMax(TLista *plista, SondaMarte *sonda)
-{
-    float pesototal = PesoCompartimento(plista);
-    if (pesototal <= sonda->capacidadeSonda)
-    {
-        return 1;
-    }
-    else
-    {
-        return 0;
-    }
-}
-
-double PesoCompartimento(TLista *pLista)
+double PesoCompartimento(TListaRocha *pLista)
 {
     double PesoT = 0.0;
     ApontadorRocha att = pLista->pPrimeiro->pProx;

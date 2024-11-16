@@ -14,7 +14,14 @@ TRocha iniciarRocha(TRocha* rocha, int identificador, TListaMineral* lista_miner
     set_data(rocha, data);
 
     return *rocha;
-} 
+}
+
+TRocha preenche_rocha(TRocha* rocha, int identificador, char* categoria) {
+    set_identificador(rocha, identificador);
+    set_categoria(rocha, categoria);
+
+    return *rocha;
+}
 
 double get_peso(TRocha *rocha) {
     return rocha->peso;
@@ -52,17 +59,22 @@ void set_data(TRocha *rocha, int data) {
     rocha->data = data;
 }
 
-const char *classificar(TListaMineral *pLista, TRocha *rocha)
+char* classificar(TListaMineral *pListaC)
 {
-    int aux = TMListaM(pLista);
+    int aux = TMListaM(pListaC);
+    if (aux == 0){
+        printf("Nao tem mineral\n");
+        return "0";
+    }
+    
     if (aux == 1)
     {
         {
-            if (strcmp(pLista->ItemM[0].Chave.nomeM, "Ferrolita") == 0)
+            if (strcmp(pListaC->ItemM[0].Chave.nomeM, "Ferrolita") == 0)
             {
                 return "Ferrom";
             }
-            else if (strcmp(pLista->ItemM[0].Chave.nomeM, "Solarium") == 0)
+            else if (strcmp(pListaC->ItemM[0].Chave.nomeM, "Solarium") == 0)
             {
                 return "Solaris";
             }
@@ -70,33 +82,33 @@ const char *classificar(TListaMineral *pLista, TRocha *rocha)
     }
     if (aux == 2)
     {
-        if (strcmp(pLista->ItemM[0].Chave.nomeM, "Terranita") == 0 || (strcmp(pLista->ItemM[1].Chave.nomeM, "Terranita")) == 0)
+        if (strcmp(pListaC->ItemM[0].Chave.nomeM, "Terranita") == 0 || (strcmp(pListaC->ItemM[1].Chave.nomeM, "Terranita")) == 0)
         {
-            if (strcmp(pLista->ItemM[0].Chave.nomeM, "Calaris") == 0 || (strcmp(pLista->ItemM[1].Chave.nomeM, "Calaris")) == 0){
+            if (strcmp(pListaC->ItemM[0].Chave.nomeM, "Calaris") == 0 || (strcmp(pListaC->ItemM[1].Chave.nomeM, "Calaris")) == 0){
                 return "Terrolis";
             }
-            else if (strcmp(pLista->ItemM[0].Chave.nomeM, "Solarium") == 0 || (strcmp(pLista->ItemM[1].Chave.nomeM, "Solarium")) == 0){
+            else if (strcmp(pListaC->ItemM[0].Chave.nomeM, "Solarium") == 0 || (strcmp(pListaC->ItemM[1].Chave.nomeM, "Solarium")) == 0){
                 return "Terrasol";
             }
-            else if (strcmp(pLista->ItemM[0].Chave.nomeM, "Aquavitae") == 0 || (strcmp(pLista->ItemM[1].Chave.nomeM, "Aquavitae")) == 0){
+            else if (strcmp(pListaC->ItemM[0].Chave.nomeM, "Aquavitae") == 0 || (strcmp(pListaC->ItemM[1].Chave.nomeM, "Aquavitae")) == 0){
                 return "Aquaterra";
             }
-            else if (strcmp(pLista->ItemM[0].Chave.nomeM, "Ferrolita") == 0 || (strcmp(pLista->ItemM[1].Chave.nomeM, "Ferrolita")) == 0){
+            else if (strcmp(pListaC->ItemM[0].Chave.nomeM, "Ferrolita") == 0 || (strcmp(pListaC->ItemM[1].Chave.nomeM, "Ferrolita")) == 0){
                 return "Terralis";
             }
         }
-        if (strcmp(pLista->ItemM[0].Chave.nomeM, "Aquavitae") == 0 || (strcmp(pLista->ItemM[1].Chave.nomeM, "Aquavitae") == 0)){
-            if(strcmp(pLista->ItemM[0].Chave.nomeM, "Calaris") == 0 || (strcmp(pLista->ItemM[1].Chave.nomeM, "Calaris")) == 0){
+        if (strcmp(pListaC->ItemM[0].Chave.nomeM, "Aquavitae") == 0 || (strcmp(pListaC->ItemM[1].Chave.nomeM, "Aquavitae") == 0)){
+            if(strcmp(pListaC->ItemM[0].Chave.nomeM, "Calaris") == 0 || (strcmp(pListaC->ItemM[1].Chave.nomeM, "Calaris")) == 0){
                 return "Calquer";
             }
         }
-        if (strcmp(pLista->ItemM[0].Chave.nomeM, "Ferrolita") == 0 || (strcmp(pLista->ItemM[1].Chave.nomeM, "Ferrolita")) == 0){
-            if (strcmp(pLista->ItemM[0].Chave.nomeM, "Solarium") == 0 || (strcmp(pLista->ItemM[1].Chave.nomeM, "Solarium")) == 0){
+        if (strcmp(pListaC->ItemM[0].Chave.nomeM, "Ferrolita") == 0 || (strcmp(pListaC->ItemM[1].Chave.nomeM, "Ferrolita")) == 0){
+            if (strcmp(pListaC->ItemM[0].Chave.nomeM, "Solarium") == 0 || (strcmp(pListaC->ItemM[1].Chave.nomeM, "Solarium")) == 0){
                 return "Solarisfer";
             }
-        }
+        }   
     }
-    if (aux == 3){
+    if (aux == 3) {
         return "Aquacalis";
     }
 }

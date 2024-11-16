@@ -7,10 +7,10 @@ void iniciaListaSonda(listaSonda* pLista){ // com cabeça inicia com celula chav
     pLista->ultSonda = pLista->primaSonda;
     pLista->primaSonda->pProxSonda = NULL;
 }
-void insereSonda(listaSonda* pLista, SondaMarte xSonda){
+void insereSonda(listaSonda* pLista, SondaMarte* xSonda){
     pLista->ultSonda->pProxSonda = (apontador) malloc(sizeof(celulaSonda));
     pLista->ultSonda = pLista->ultSonda->pProxSonda;
-    pLista->ultSonda->chaveSonda = xSonda;
+    pLista->ultSonda->chaveSonda = *xSonda;
     pLista->ultSonda->pProxSonda = NULL;
 
 }

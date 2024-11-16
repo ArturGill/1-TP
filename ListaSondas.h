@@ -17,7 +17,7 @@ typedef struct{
 }listaSonda;
 
 void iniciaListaSonda(listaSonda* pLista);
-void insereSonda(listaSonda* plista, SondaMarte xSonda);
+void insereSonda(listaSonda* plista, SondaMarte* xSonda);
 void retiraSonda(listaSonda* plista);
 void ImprimeListaSondas(listaSonda* plista);
 

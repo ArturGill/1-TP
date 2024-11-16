@@ -6,12 +6,11 @@
 
 #include "Mineral.h"
 
-typedef TMineral TchaveM;
 typedef int ApontadorMineral;
 
 typedef struct 
 {
-    TchaveM Chave;
+    TMineral Chave;
 } TItemMineral;
 
 typedef struct 
@@ -22,8 +21,8 @@ typedef struct
 
 void FLVaziaM(TListaMineral* pLista);
 int LEhVaziaM(TListaMineral* pLista);
-int LInsereM(TListaMineral* pLista, TMineral x);
-int LRetiraMnome(TListaMineral* pLista, char *nomeM, TItemMineral *pX);
+void LInsereM(TListaMineral* pLista, TMineral x);
+int LRetiraMnome(TListaMineral* pLista, char *nomeM, TMineral *pX);
 void LimprimeM(TListaMineral* pLista);
 void PListaMinerais(TListaMineral* pLista, TMineral* mineral);
 int TMListaM(TListaMineral *pLista);
