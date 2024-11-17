@@ -8,6 +8,7 @@ typedef struct
 } TMineral;
 
 TMineral preenche_mineral(TMineral* mineral, char *nomeM, float dureza, float reatividade, char *cor);
+TMineral preenche_mineral2(TMineral*mineral, char *nomeM);
 
 char* get_nomeM(TMineral* mineral);
 float get_dureza(TMineral* mineral);

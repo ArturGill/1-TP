@@ -80,7 +80,7 @@ void LImprimeC(TListaRocha pLista)
     pAux = pLista.pPrimeiro->pProx;
     while (pAux != NULL)
     {
-        printf("%s\n", pAux->Item.Chave->categoria);
+        printf("Categoria: %s\nPeso: %f\n", pAux->Item.Chave->categoria, pAux->Item.Chave->peso);
         pAux = pAux->pProx; // próxima célula
     }
     if (pAux == pLista.pPrimeiro->pProx)
