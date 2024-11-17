@@ -23,11 +23,13 @@ typedef struct
 
 int LTamanhoC(TListaRocha* pListaR);
 void FLVaziaC(TListaRocha* pListaR);
-int LEhVazia(TListaRocha* pListaR);
+int LEhVaziaC(TListaRocha* pListaR);
 int LInsereC(TListaRocha* pListaR, TRocha* pItem);
 int LRetiraC(TListaRocha* pListaR, TRocha* rocha);
 void LImprimeC(TListaRocha pListaR);
 double PesoCompartimento(TListaRocha* pListaR);
 void TrocarRocha(TListaRocha* pListaR, TRocha* Item);
+
+int lista_rocha_vazia(TListaRocha *pLista);
 
 #endif

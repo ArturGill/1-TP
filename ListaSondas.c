@@ -54,6 +54,17 @@ void ImprimeListaSondas(listaSonda* plista){
     }
 }
 
+void Imprime_I_Lista(listaSonda* plista){
+
+    celulaSonda* atual = plista->primaSonda->pProxSonda;
+
+    while(atual != NULL) {
+        printf("Identificador: %d\n",atual->chaveSonda.identificadorSonda);
+        imprimeCompartimentoSonda2(&atual->chaveSonda.CompartimentoSonda);
+        atual = atual->pProxSonda;
+    }
+}
+
 SondaMarte* dist_euclidiana(listaSonda* plista, float lat_R, float long_R){ //colocar na .h
     celulaSonda* atual = plista->primaSonda->pProxSonda;
     float menorDist = 1000000;
@@ -61,7 +72,6 @@ SondaMarte* dist_euclidiana(listaSonda* plista, float lat_R, float long_R){ //co
     float lon_S;
     float distAtual = 0;
     SondaMarte* sondaproxima;
-
     while(atual != NULL){
         lat_S = atual->chaveSonda.latSonda;
         lon_S = atual->chaveSonda.longSonda;
@@ -82,15 +92,19 @@ void AdicionarRochaS(listaSonda *ListaSonda, TRocha *rocha) {
 
     apontador pAux = ListaSonda->primaSonda->pProxSonda;
     SondaMarte *sonda = NULL;
+    
+
     while (pAux != NULL) {
         sonda = &pAux->chaveSonda;
         float verificarcap = sonda->capacidadeSonda - rocha->peso;
+        
+        // if (strcmp(pAux->chaveSonda.CompartimentoSonda.pPrimeiro->Item.Chave->categoria, rocha->categoria) == 0 && pAux->chaveSonda.CompartimentoSonda.pPrimeiro->Item.Chave->peso >= rocha->peso) {
+        //     pAux->chaveSonda.CompartimentoSonda.pPrimeiro->Item.Chave = rocha;
+        //     printf("teste4");
+        // }
 // perguntar sobre o contemcategoria
         //verifica a capacidade
         if (verificarcap >= rocha->peso) {
-            if (strcmp(pAux->chaveSonda.CompartimentoSonda.pPrimeiro->Item.Chave->categoria, rocha->categoria) == 0) {
-                TrocarRocha(&ListaSonda->itemSonda.chaveSonda.CompartimentoSonda, rocha);
-            }
             sondaAmz = dist_euclidiana(ListaSonda, lat_i, long_i);
         }
         pAux = pAux->pProxSonda;
@@ -122,7 +136,7 @@ void AdicionarRochaS(listaSonda *ListaSonda, TRocha *rocha) {
     sonda->capacidadeSonda -= rocha->peso;
     
     printf("--------------------------------\n");
-    printf("Rocha coletada\nSonda: %d\n", sondaAmz->identificadorSonda);
+    printf("Rocha coletada!\nSonda: %d\n", sondaAmz->identificadorSonda);
     
 }
 

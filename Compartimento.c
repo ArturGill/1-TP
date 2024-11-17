@@ -26,7 +26,15 @@ void FLVaziaC(TListaRocha *pLista)
 
 int LEhVaziaC(TListaRocha *pLista)
 {
-    return pLista->pPrimeiro == pLista->pUltimo;
+    return(pLista->pPrimeiro == pLista->pUltimo);
+}
+int lista_rocha_vazia(TListaRocha *pLista) {
+    if (pLista->pPrimeiro->pProx == NULL) {
+        return 1;
+    }
+    else{
+        return 0;
+    }
 }
 
 int LInsereC(TListaRocha *pLista, TRocha *pItem)

@@ -5,7 +5,7 @@
 #include "Rocha.h"
 
 TRocha preenche_rocha(TRocha* rocha, float lat_rocha, float long_rocha, float peso, TListaMineral* lista_mineral) {
-    FLVaziaM(rocha->lista_mineral); //inicia lista mineral na rocha
+     //inicia lista mineral na rocha
     set_listaminerais(rocha, lista_mineral);
     set_latRocha(rocha, lat_rocha);
     set_longRocha(rocha, long_rocha);

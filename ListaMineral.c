@@ -3,7 +3,7 @@
 #include <string.h>
 
 void FLVaziaM(TListaMineral* pLista) {
-    pLista->Primeiro = InicioArranjo;
+    pLista->Primeiro = 0;
     pLista->Ultimo = pLista->Primeiro;
 }
 
@@ -13,7 +13,7 @@ int LEhVaziaM(TListaMineral* pLista) {
 
 void LInsereM(TListaMineral* pLista, TMineral x) {
     if (pLista->Ultimo >= MaxTam) {
-        printf("ERRO DE INCERCAO");
+        printf("ERRO DE INCERCAO\n");
         return;
     }
     pLista->ItemM[pLista->Ultimo].Chave = x;

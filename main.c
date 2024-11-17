@@ -32,46 +32,7 @@ int main() {
     int qntdOperacoes;
     fscanf(arq,"%d", &qntdOperacoes);
 
-    // for(int i=0; i<qntdOperacoes; i++){
-    //     printf("Selecione a operacao: (R, I, E)\n")/
-    //     scanf(" %c", &operacao);
-    //     TRocha novarocha;
-
-    //     switch (operacao)
-    //     {
-    //     case 'R':
-    //         printf("Digite a latitude, longitude, peso e minerais\n");
-    //         float lat, long_i, peso;
-    //         char minerais[100] = "ferrolita Ferrom";
-    //         scanf("%f %f %f", &lat, &long_i, &peso);
-            
-    //         const char delim[2] = " ";
-    //         char *parte;
-
-    //         parte = strtok(minerais, delim);
-    //         preenche_rocha(&novarocha, lat, long_i, peso, &novarocha.lista_mineral);
-
-    //         while (parte != NULL) 
-    //         {
-    //             strcpy(novarocha.lista_mineral->ItemM->Chave.nomeM, parte);
-    //             printf("%s\n", novarocha.lista_mineral->ItemM->Chave.nomeM);
-    //             parte = strtok(NULL, delim); 
-    //         }
-            
-            
-
-    //         break;
-    //     case 'E':
-
-    //     pontoComumSondas(&sondasL);
-        
-        
-        
-    //     break;
-    //     default:
-    //         break;
-    //     }
-    // }
+    ImprimeListaSondas(&sondasL);
 
     for (int i = 0; i < qntdOperacoes; i++) {
         printf("Selecione a operacao: (R, I, E)\n");
@@ -86,28 +47,40 @@ int main() {
                 scanf("%f %f %f\n", &lat, &long_i, &peso);
                 getchar();
                 fgets(minerais, sizeof(minerais), stdin);
-                // minerais[strcspn(minerais, "\n")] = '\0';
+                minerais[strcspn(minerais, "\n")] = '\0';
 
                 // Inicializa a rocha
 
                 // Quebra os minerais em partes e adiciona à lista
-                const char delim[] = " ";
+                const char delim[2] = " ";
                 char *parte = strtok(minerais, delim);
-                int i = 0
+                TMineral x;
+                TListaMineral listaM;
+                FLVaziaM(&listaM);
                 while (parte != NULL) {
-                    
+                    strcpy(x.nomeM, parte);
+                    LInsereM(&listaM, x);
                     parte = strtok(NULL, delim);
-                    i++;
+                    // vai me da uma categoria, eu tenho que inserir em um mineral 
+                    // e dps colocar na lista mineral da rocha 
                 }
-                TRocha rocha = preenche_rocha(&novarocha, lat, long_i, peso, novarocha.lista_mineral);
-                printf("%s", rocha.categoria);
+                novarocha = preenche_rocha(&novarocha, lat, long_i, peso, &listaM);
+                
+                // vamos colocar essa rocha em um compartimento
+                AdicionarRochaS(&sondasL, &novarocha);
+                
                 break;
             }
-            case 'E':
+            case 'E':{
                 pontoComumSondas(&sondasL);
                 break;
-            default:
+            }
+            case 'I':{
+                Imprime_I_Lista(&sondasL);
+            }
+            default: {
                 break;
+            }
         }
     }
 

@@ -51,9 +51,15 @@ void moveSonda(SondaMarte* sonda){
 
 void imprimeCompartimentoSonda2(TListaRocha *compartimento) {
     ApontadorRocha pAux = compartimento->pPrimeiro->pProx;
+    
+    if (pAux == NULL) {
+        printf("(compartimento vazio!)\n");
+    }
+
     while (pAux != NULL) {
-        printf("%s", pAux->Item.Chave->categoria);
+        printf("%s %1.f\n", pAux->Item.Chave->categoria, pAux->Item.Chave->peso);
         pAux = pAux->pProx; 
+
     } 
 }
 
@@ -86,6 +92,8 @@ SondaMarte inicializaSondaTexto(SondaMarte* sonda,float lat_i,float lon_i,float 
     set_CapacidadeSonda(sonda,c_i);
     set_VelSonda(sonda,v_i);
     set_CombustivelSonda(sonda,nc_i);
+    sonda->CompartimentoSonda;
+
 
     return *sonda;
 }
