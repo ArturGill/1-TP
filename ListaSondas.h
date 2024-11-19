@@ -27,7 +27,11 @@ void AdicionarRochaS(listaSonda *sonda, TRocha *rocha);
 void pontoComumSondas(listaSonda* sondasLista);
 void redistribuiPeso(listaSonda* sondasLista);
 
+int categoria_repete(SondaMarte *sonda, char *categoria, float peso);
+float retorna_peso(TListaRocha compartimento, char *categoria);
 void Imprime_I_Lista(listaSonda* plista);
+void operacao_E(listaSonda* sondaLista);
+void retiraRochaTemp(SondaMarte* sonda, TListaRocha listaRSondas, float media);
 
 
 #endif

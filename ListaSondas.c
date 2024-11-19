@@ -149,21 +149,73 @@ void pontoComumSondas(listaSonda* sondasLista){ // colocar no .h
     }
 }
 
-void redistribuiPeso(listaSonda* sondasLista){
-    celulaSonda* atual = sondasLista->primaSonda->pProxSonda;
-    float somaPesos = 0;
-    int contador = 0;
-    double pesoIndv;
-    while(atual != NULL){
-        atual->chaveSonda.pesoAtual = PesoCompartimento(&atual->chaveSonda.CompartimentoSonda);
-        contador++;
-        atual = atual->pProxSonda;
-    }
-    float pesoMedio = somaPesos/contador;
+// float redistribuiPeso(listaSonda* sondasLista){
+//     celulaSonda* atual = sondasLista->primaSonda->pProxSonda;
+//     float somaPesos = 0;
+//     int contador = 0;
+//     while(atual != NULL){
+//         atual->chaveSonda.pesoAtual = PesoCompartimento(&atual->chaveSonda.CompartimentoSonda);
+//         somaPesos = somaPesos + atual->chaveSonda.pesoAtual;
+//         contador++;
+//         atual = atual->pProxSonda;
+//     }
+//     float pesoMedio = somaPesos/contador;
+//     return pesoMedio;
+// }
 
-    atual = sondasLista->primaSonda->pProxSonda;
-    while(atual != NULL){
-        atual->chaveSonda.pesoAtual = pesoMedio;
-        atual = atual->pProxSonda;
+int categoria_repete(SondaMarte *sonda, char *categoria, float peso) {
+    TCelulaRocha *pAux = sonda->CompartimentoSonda.pPrimeiro->pProx;
+    while (pAux != NULL) {
+        if (strcmp(pAux->Item.Chave->categoria, categoria) == 0 && pAux->Item.Chave->peso < peso) {
+            return 1;
+        }
+        pAux = pAux->pProx;
     }
+    return 0;
 }
+
+// float retorna_peso(TListaRocha compartimento, char *categoria) {
+//     TCelulaRocha *pAux = compartimento.pPrimeiro->pProx;
+
+//     while (pAux != NULL) {
+//        if (strcmp(pAux->Item.Chave->categoria, categoria) == 0) {
+//             return pAux->Item.Chave->peso;
+//        }
+//        pAux = pAux->pProx;
+//     }
+    
+// }
+// talvez ireei usar as duas funções acima, para não adicionar duas rochas iguais
+// void operacao_E(listaSonda* sondaLista) {
+   
+//     celulaSonda* pAux = sondaLista->itemSonda.pProxSonda;
+//     pAux = sondaLista->primaSonda->pProxSonda;
+
+//     TListaRocha listaRSondas;
+//     FLVaziaC(&listaRSondas);
+//     float mediaS = redistribuiPeso(sondaLista);
+//     printf("Fora\n");
+
+//     pontoComumSondas(&sondaLista)
+//     while (pAux != NULL)
+//     {
+        
+//     } //continuar função
+    
+    
+    
+// }
+
+// void retiraRochaTemp(SondaMarte* sonda, TListaRocha listaRSondas, float media){
+//     ApontadorRocha atual;
+//     atual = sonda->CompartimentoSonda.pPrimeiro->pProx;
+//     while(atual != NULL){
+//         if(sonda->pesoAtual > media){
+//             sonda->pesoAtual -= &atual->Item.Chave->peso;
+//             TItemRocha* rochasTemp = &atual->Item.Chave->peso;
+//             LInsereC(listaRSondas, rochasTemp);
+//             LRetiraC(&sonda->CompartimentoSonda, rochasTemp);
+//         }
+//         atual = atual->pProx;
+//     }
+// }
