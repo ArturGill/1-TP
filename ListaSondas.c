@@ -98,12 +98,6 @@ void AdicionarRochaS(listaSonda *ListaSonda, TRocha *rocha) {
         sonda = &pAux->chaveSonda;
         float verificarcap = sonda->capacidadeSonda - rocha->peso;
         
-        // if (strcmp(pAux->chaveSonda.CompartimentoSonda.pPrimeiro->Item.Chave->categoria, rocha->categoria) == 0 && pAux->chaveSonda.CompartimentoSonda.pPrimeiro->Item.Chave->peso >= rocha->peso) {
-        //     pAux->chaveSonda.CompartimentoSonda.pPrimeiro->Item.Chave = rocha;
-        //     printf("teste4");
-        // }
-// perguntar sobre o contemcategoria
-        //verifica a capacidade
         if (verificarcap >= rocha->peso) {
             sondaAmz = dist_euclidiana(ListaSonda, lat_i, long_i);
         }
@@ -122,11 +116,12 @@ void AdicionarRochaS(listaSonda *ListaSonda, TRocha *rocha) {
         sondaAmz->CompartimentoSonda.pUltimo = sondaAmz->CompartimentoSonda.pPrimeiro;
     }
     TCelulaRocha *novarocha = (TCelulaRocha*) malloc(sizeof(TCelulaRocha));
-    novarocha->Item.Chave = rocha;
-    novarocha->pProx = NULL;
+
+    TRocha *novaRocha = (TRocha*) malloc(sizeof(TRocha));
+    *novaRocha = *rocha; // Copia os valores de 'rocha' para a nova estrutura
+    novarocha->Item.Chave = novaRocha;
 
     if (sondaAmz->CompartimentoSonda.pPrimeiro == NULL) {
-        sondaAmz->CompartimentoSonda.pPrimeiro = novarocha;
         sondaAmz->CompartimentoSonda.pUltimo = novarocha;
     } 
     else {
