@@ -92,7 +92,6 @@ SondaMarte inicializaSondaTexto(SondaMarte* sonda,float lat_i,float lon_i,float 
     set_CapacidadeSonda(sonda,c_i);
     set_VelSonda(sonda,v_i);
     set_CombustivelSonda(sonda,nc_i);
-    sonda->CompartimentoSonda;
 
 
     return *sonda;

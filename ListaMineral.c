@@ -29,7 +29,7 @@ int LRetiraMnome(TListaMineral* pLista, char *nomeM, TMineral *pX) {
     for (cont = pLista->Primeiro; cont <= pLista->Ultimo; cont++) {
         if (strcmp(nomeM, pLista->ItemM[cont].Chave.nomeM) == 0) {
             *pX = pLista->ItemM[cont].Chave;
-            for (cont + 1; cont < pLista->Ultimo; cont++) {
+            for (cont += 1; cont < pLista->Ultimo; cont++) {
                 pLista->ItemM[cont - 1] = pLista->ItemM[cont];
             }
             pLista->Ultimo--;
