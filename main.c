@@ -26,7 +26,7 @@ int main()
         arq = fopen("teste.txt", "r");
         if (arq == NULL)
         {
-            printf("falha leitura");
+            printf("falha na leitura\n");
             exit(0);
         }
         int N_Sondas;
@@ -53,31 +53,31 @@ int main()
             {
                 float lat, long_i, peso;
                 char minerais[100];
-                fscanf(arq, "%f %f %f", &lat, &long_i, &peso);
+                fscanf(arq, "%f %f %f ", &lat, &long_i, &peso);
                 getchar();
-                fgets(minerais, sizeof(minerais), stdin);
+                TMineral x;
+                TListaMineral listaM;
+                FLVaziaM(&listaM);
+                fgets(minerais, sizeof(minerais), arq);
+                
                 minerais[strcspn(minerais, "\n")] = '\0';
-
-                // Inicializa a rocha
 
                 // Quebra os minerais em partes e adiciona à lista
                 const char delim[2] = " ";
                 char *parte = strtok(minerais, delim);
-                TMineral x;
-                TListaMineral listaM;
-                FLVaziaM(&listaM);
+                
+
                 while (parte != NULL)
                 {
                     strcpy(x.nomeM, parte);
                     LInsereM(&listaM, x);
                     parte = strtok(NULL, delim);
-                    // vai me da uma categoria, eu tenho que inserir em uma rocha
-                    // e dps colocar na lista de sondas
                 }
+                
                 novarocha = preenche_rocha(&novarocha, lat, long_i, peso, &listaM);
 
                 // vamos colocar essa rocha em um compartimento
-                AdicionarRochaS(&sondasL, &novarocha);
+                operacaoR(&sondasL, &novarocha);
 
                 break;
             }
@@ -108,7 +108,7 @@ int main()
 
         int N_Sondas;
         float lat_i, lon_i, c_i, v_i, nc_i;
-        
+
         printf("Digite a quantidade de sondas que irao para Marte:\n");
         scanf("%d", &N_Sondas);
 
@@ -133,11 +133,10 @@ int main()
             {
             case 'R':
             {
-                printf("Digite a latitude, longitude, peso e minerais (separados com " ").\n");
+                printf("Digite a latitude, longitude, peso e minerais (separados com espaco).\n");
                 float lat, long_i, peso;
                 char minerais[100];
                 scanf("%f %f %f", &lat, &long_i, &peso);
-                getchar();
                 fgets(minerais, sizeof(minerais), stdin);
                 minerais[strcspn(minerais, "\n")] = '\0';
 
@@ -160,7 +159,7 @@ int main()
                 novarocha = preenche_rocha(&novarocha, lat, long_i, peso, &listaM);
 
                 // vamos colocar essa rocha em um compartimento
-                AdicionarRochaS(&sondasL, &novarocha);
+                operacaoR(&sondasL, &novarocha);
 
                 break;
             }
