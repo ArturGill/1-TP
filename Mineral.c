@@ -11,6 +11,11 @@ TMineral preenche_mineral(TMineral* mineral, char *nomeM, float dureza, float re
 
     return *mineral; 
 }
+TMineral preenche_mineral2(TMineral*mineral, char *nomeM) {
+    set_nomeM(mineral, nomeM);
+
+    return *mineral;
+}
 
 char* get_nomeM(TMineral* mineral) {
     return mineral->nomeM;

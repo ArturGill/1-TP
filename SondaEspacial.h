@@ -3,7 +3,7 @@
 
 #include "Compartimento.h"
 
-typedef enum{
+typedef enum {
     LIGADA = 1,
     DESLIGADA = 0
 } StatusSonda;
@@ -15,11 +15,14 @@ typedef struct {
     float capacidadeSonda;
     float velSonda;
     float combustivelSonda;
-    StatusSonda status; //perguntar se os nomes do especificados no TP tem que ser os mesmos
+    TListaRocha CompartimentoSonda;
+    StatusSonda status;
+    float pesoAtual; //perguntar se os nomes do especificados no TP tem que ser os mesmos
 
     
 } SondaMarte;
 
+void imprimeCompartimentoSonda2(TListaRocha *compartimento);
 SondaMarte inicializaSonda(SondaMarte* sonda); 
 void imprimeSonda(SondaMarte sonda);
 void ligaSonda(SondaMarte* sonda);
@@ -37,9 +40,8 @@ void set_CapacidadeSonda(SondaMarte* sonda, float capacidadeSonda);
 void set_VelSonda(SondaMarte* sonda, float vel);
 void set_CombustivelSonda(SondaMarte* sonda, float combustivel);
 int gerarNumeroAleatorio();
-
 SondaMarte inicializaSondaTexto(SondaMarte* sonda,float lat_i,float lon_i,float c_i,float v_i, float nc_i);
-
-
+void InsereRochaSonda(SondaMarte *sonda, TListaRocha *compartimento);
+void imprimirCompartimentoSonda(SondaMarte *sonda);
 
 #endif // SONDAESPACIAL_H

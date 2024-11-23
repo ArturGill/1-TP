@@ -26,7 +26,15 @@ void FLVaziaC(TListaRocha *pLista)
 
 int LEhVaziaC(TListaRocha *pLista)
 {
-    return pLista->pPrimeiro == pLista->pUltimo;
+    return(pLista->pPrimeiro == pLista->pUltimo);
+}
+int lista_rocha_vazia(TListaRocha *pLista) {
+    if (pLista->pPrimeiro->pProx == NULL) {
+        return 1;
+    }
+    else{
+        return 0;
+    }
 }
 
 int LInsereC(TListaRocha *pLista, TRocha *pItem)
@@ -80,7 +88,7 @@ void LImprimeC(TListaRocha pLista)
     pAux = pLista.pPrimeiro->pProx;
     while (pAux != NULL)
     {
-        printf("%s\n", pAux->Item.Chave->categoria);
+        printf("Categoria: %s\nPeso: %f\n", pAux->Item.Chave->categoria, pAux->Item.Chave->peso);
         pAux = pAux->pProx; // próxima célula
     }
     if (pAux == pLista.pPrimeiro->pProx)

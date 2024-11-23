@@ -1,5 +1,5 @@
 CC=gcc
-CFLAGS=-g
+CFLAGS=-g -Wall
 SRC=$(wildcard *.c)
 OBJ=$(SRC:.c=.o)
 TARGET=app.exe

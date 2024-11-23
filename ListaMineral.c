@@ -3,7 +3,7 @@
 #include <string.h>
 
 void FLVaziaM(TListaMineral* pLista) {
-    pLista->Primeiro = InicioArranjo;
+    pLista->Primeiro = 0;
     pLista->Ultimo = pLista->Primeiro;
 }
 
@@ -13,7 +13,7 @@ int LEhVaziaM(TListaMineral* pLista) {
 
 void LInsereM(TListaMineral* pLista, TMineral x) {
     if (pLista->Ultimo >= MaxTam) {
-        printf("ERRO DE INCERCAO");
+        printf("ERRO DE INCERCAO\n");
         return;
     }
     pLista->ItemM[pLista->Ultimo].Chave = x;
@@ -29,7 +29,7 @@ int LRetiraMnome(TListaMineral* pLista, char *nomeM, TMineral *pX) {
     for (cont = pLista->Primeiro; cont <= pLista->Ultimo; cont++) {
         if (strcmp(nomeM, pLista->ItemM[cont].Chave.nomeM) == 0) {
             *pX = pLista->ItemM[cont].Chave;
-            for (cont + 1; cont < pLista->Ultimo; cont++) {
+            for (cont += 1; cont < pLista->Ultimo; cont++) {
                 pLista->ItemM[cont - 1] = pLista->ItemM[cont];
             }
             pLista->Ultimo--;

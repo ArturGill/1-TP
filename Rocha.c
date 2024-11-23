@@ -4,21 +4,14 @@
 
 #include "Rocha.h"
 
-TRocha iniciarRocha(TRocha* rocha, int identificador, TListaMineral* lista_mineral, char *categoria, double peso, float lat_rocha, float long_rocha, int data) {
-    set_identificador(rocha, identificador);
+TRocha preenche_rocha(TRocha* rocha, float lat_rocha, float long_rocha, float peso, TListaMineral* lista_mineral) {
+     //inicia lista mineral na rocha
     set_listaminerais(rocha, lista_mineral);
-    set_categoria(rocha, categoria);
-    set_peso(rocha, peso);
     set_latRocha(rocha, lat_rocha);
     set_longRocha(rocha, long_rocha);
-    set_data(rocha, data);
-
-    return *rocha;
-}
-
-TRocha preenche_rocha(TRocha* rocha, int identificador, char* categoria) {
-    set_identificador(rocha, identificador);
-    set_categoria(rocha, categoria);
+    set_peso(rocha, peso);
+    char* classificacao = classificar(lista_mineral);
+    set_categoria(rocha, classificacao);
 
     return *rocha;
 }
@@ -51,7 +44,7 @@ void set_longRocha(TRocha *rocha, float long_rocha) {
     rocha->long_rocha = long_rocha;
 }
 
-void set_peso(TRocha *rocha, double peso) {
+void set_peso(TRocha *rocha, float peso) {
     rocha->peso = peso;
 }
 
@@ -62,7 +55,7 @@ void set_data(TRocha *rocha, int data) {
 char* classificar(TListaMineral *pListaC)
 {
     int aux = TMListaM(pListaC);
-    if (aux == 0){
+    if (aux == 0) {
         printf("Nao tem mineral\n");
         return "0";
     }

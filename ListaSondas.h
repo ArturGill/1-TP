@@ -17,10 +17,21 @@ typedef struct{
 }listaSonda;
 
 void iniciaListaSonda(listaSonda* pLista);
-void insereSonda(listaSonda* plista, SondaMarte* xSonda);
+void insereSonda(listaSonda* plista, SondaMarte xSonda);
 void retiraSonda(listaSonda* plista);
 void ImprimeListaSondas(listaSonda* plista);
+void quantidadeSondasTexto(listaSonda* sondasL,int N_sondas);
+SondaMarte* dist_euclidiana(listaSonda* plista, float lat_R, float long_R);
+void Operacao_R_Imprime(listaSonda* plista);
+void operacaoR(listaSonda *sonda, TRocha *rocha);
+void pontoComumSondas(listaSonda* sondasLista);
+void redistribuiPeso(listaSonda* sondasLista);
 
+int categoria_repete(SondaMarte *sonda, char *categoria, float peso);
+float retorna_peso(TListaRocha compartimento, char *categoria);
+void Imprime_I_Lista(listaSonda* plista);
+void operacao_E(listaSonda* sondaLista);
+void retiraRochaTemp(SondaMarte* sonda, TListaRocha listaRSondas, float media);
 
 
 #endif

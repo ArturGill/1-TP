@@ -1,21 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "SondaEspacial.h"
-#include "Compartimento.h"
 #include <time.h>
 #define parteNulaSonda 0
 
-SondaMarte inicializaSonda(SondaMarte* sonda){
-    int numeroAleatorio;
-    numeroAleatorio = gerarNumeroAleatorio();
-    setIdentificadorSonda(sonda, numeroAleatorio);
-    set_status(sonda, 0); //Apartir da struct Status já inicio a sonda como desligada 
-    sonda->capacidadeSonda = parteNulaSonda;
-    sonda->velSonda = parteNulaSonda;
-    sonda->combustivelSonda = parteNulaSonda;
-
-    return *sonda;
-}
 void ligaSonda(SondaMarte* sonda){
     set_status(sonda, 1);
 }
@@ -60,11 +48,27 @@ void moveSonda(SondaMarte* sonda){
     set_lat(sonda, lat);
     set_long(sonda, longS);
 }
+
+void imprimeCompartimentoSonda2(TListaRocha *compartimento) {
+    ApontadorRocha pAux = compartimento->pPrimeiro->pProx;
+    
+    if (pAux == NULL) {
+        printf("(compartimento vazio!)\n");
+    }
+
+    while (pAux != NULL) {
+        printf("%s %1.f\n", pAux->Item.Chave->categoria, pAux->Item.Chave->peso);
+        pAux = pAux->pProx; 
+
+    } 
+}
+
 void imprimeSonda(SondaMarte sonda) {
     printf("Identificador: %d\n", sonda.identificadorSonda);
     printf("Latitude da Sonda: %f\n", sonda.latSonda);
     printf("Longitude da Sonda: %f\n", sonda.longSonda);
-    
+    // imprimirCompartimentoSonda(&sonda);
+    imprimeCompartimentoSonda2(&sonda.CompartimentoSonda);
     printf("Status da Sonda: ");
     switch (sonda.status) {
         case 0: printf("Desligada\n"); break;
@@ -78,7 +82,8 @@ void imprimeSonda(SondaMarte sonda) {
 }
 
 SondaMarte inicializaSondaTexto(SondaMarte* sonda,float lat_i,float lon_i,float c_i,float v_i, float nc_i){
-     int numeroAleatorio;
+    FLVaziaC(&sonda->CompartimentoSonda);
+    int numeroAleatorio;
     numeroAleatorio = gerarNumeroAleatorio();
     setIdentificadorSonda(sonda, numeroAleatorio);
     set_status(sonda, 1); //Apartir da struct Status já inicio a sonda como ligada 
@@ -88,5 +93,27 @@ SondaMarte inicializaSondaTexto(SondaMarte* sonda,float lat_i,float lon_i,float 
     set_VelSonda(sonda,v_i);
     set_CombustivelSonda(sonda,nc_i);
 
+
     return *sonda;
+}
+
+void InsereRochaSonda(SondaMarte *sonda, TListaRocha *compartimento) {
+     sonda->CompartimentoSonda = *compartimento;
+}
+
+void imprimirCompartimentoSonda(SondaMarte *sonda) {
+    if (sonda == NULL) {
+        printf("Erro: a sonda é nula.\n");
+        return;
+    }
+    TListaRocha *listaRochaSondas = &sonda->CompartimentoSonda;
+    ApontadorRocha atual = listaRochaSondas->pPrimeiro;
+    while (atual != NULL)
+    {
+        TRocha *rocha = atual->Item.Chave;
+        if(rocha != NULL){
+            printf("%s %f\n", rocha->categoria, rocha->peso);
+        }
+        atual = atual->pProx;
+    }
 }
